@@ -1,9 +1,11 @@
 function setup() {
   createCanvas(400, 400);
-  //sliders for values
-  tyndeacceleration = createSlider(0, 90 , 45, 1);
-  tyndeacceleration.position();
-  tyndeacceleration.size();
+
+  settings = new Settings(
+    createSlider(0, 90, 45, 1),
+    createSlider(),
+    createSlider()
+  )
 
 }
 

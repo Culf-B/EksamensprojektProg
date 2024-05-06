@@ -1,5 +1,5 @@
 class Settings extends Window {
-    constructor() {
-        
+    constructor(tyngdeacceleration) {
+        gSlider = tyngdeacceleration
     }
 }
