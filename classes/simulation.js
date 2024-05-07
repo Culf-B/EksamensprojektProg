@@ -1,5 +1,7 @@
 class Simulation extends Window {
-    constructor() {
+    constructor() 
+    {
+        super();
         
     }
 

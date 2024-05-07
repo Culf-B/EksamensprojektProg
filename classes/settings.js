@@ -3,14 +3,14 @@ class Settings extends Window {
         super();
         //create sliders
         this.gSlider = tyngdeacceleration;
-        this.s0 = starthastighed;
+        this.v0 = starthastighed;
         this.theta = vinkel;
 
         //slider setting
         this.gSlider.position();
         this.gSlider.size();
-        this.s0.position();
-        this.s0.size();
+        this.v0.position();
+        this.v0.size();
         this.theta.position();
         this.theta.size();
 
