@@ -19,8 +19,22 @@ class Simulation extends Window
         // Create ball
         this.ball = new Ball(this.v0, this.g, this.a);
 
+        // Create x and y axis visualization
+        this.xAxis = new Axis(
+            0, this.surface.height - 20, this.surface.width, 20,
+            0, round(this.xEnd, 0), 0, false
+        );
+        this.yAxis = new Axis(
+            0, 0, 20, this.surface.height,
+            round(this.yMax, 0), 0, 1
+        );
+
         // Add ball to window grapics so it can be drawn by window
-        this.graphics = [{type: "classObject", object: this.ball}];
+        this.graphics = [
+            {type: "classObject", object: this.ball},
+            {type: "classObject", object: this.xAxis},
+            {type: "classObject", object: this.yAxis}
+        ];
     }
 
     update()
