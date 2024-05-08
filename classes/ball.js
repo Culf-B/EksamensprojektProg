@@ -14,10 +14,17 @@ class Ball {
         this.r = 10;
     }
 
-    updatePos(t)
+    updatePos(t, surface, endX)
     {
         this.x = this.v0x * t;
-        this.y = 0.5 * (-this.g) * pow(t, 2) + this.v0y * t;
+        this.y = 0.5 * this.g * pow(t, 2) + this.v0y * t;
+        this.y += surface.height - this.r
+        if (this.x > endX)
+        {
+            this.x = endX;
+            this.y = surface.height - this.r;
+        }
+        this.x += this.r
     }
 
     draw(surface)
@@ -25,6 +32,6 @@ class Ball {
         surface.stroke(0);
         surface.fill(255);
 
-        surface.circle(tihs.x, this.y, this.r * 2);
+        surface.circle(this.x, this.y, this.r * 2);
     }
 }
