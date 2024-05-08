@@ -30,10 +30,10 @@ class Axis
         {
             this.drawVertical(surface);
         }
-   }
+    }
 
-   drawHorizontal(surface)
-   {
+    drawHorizontal(surface)
+    {
         // Axisline
         surface.line(
             this.drawBoxX,
@@ -64,7 +64,7 @@ class Axis
             surface.text(
                 this.axisStart,
                 this.drawBoxX + 5,
-                this.drawBoxY + textAscent()
+                this.drawBoxY + this.drawBoxHeight - 2
             );
         }
         
@@ -73,14 +73,14 @@ class Axis
         {
             surface.text(
                 this.axisEnd,
-                this.drawBoxX + this.drawBoxWidth - textWidth(this.axisEnd) - 5,
-                this.drawBoxY + textAscent() - 2
+                this.drawBoxX + this.drawBoxWidth - textWidth(this.axisEnd) - 2,
+                this.drawBoxY + this.drawBoxHeight - 2
             );
         }
         
-   }
-   drawVertical(surface)
-   {
+    }
+    drawVertical(surface)
+    {
         // Axisline
         surface.line(
             this.drawBoxX,
@@ -124,5 +124,5 @@ class Axis
                 this.drawBoxY + this.drawBoxHeight - 2
             );
         }        
-   }
+    }
 }
