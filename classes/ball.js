@@ -8,7 +8,7 @@ class Ball {
         this.v0x = this.v0 * cos(this.a);
         this.v0y = this.v0 * sin(this.a);
 
-        this.vX = this.v0x; // Constant velocity on x-axis
+        this.vX = this.v0x; // Constant velocity on x-axis until landing
         this.vY = this.v0y; // Not constant, but they are the same at t = 0
 
         this.r = 10;
@@ -18,6 +18,8 @@ class Ball {
 
         this.x = 0;
         this.y = 0;
+
+        this.landed = false;
     }
 
     // Update position on screen and account for scaling
@@ -30,6 +32,8 @@ class Ball {
         {
             this.x = endX;
             this.y = surface.height - this.r;
+            this.vX = 0;
+            this.landed = true;
         }
 
         // Convert position to fit axis scaling (Done for y in previous calculation)
@@ -41,7 +45,14 @@ class Ball {
     // Update velocity on y axis
     updateVelY(t)
     {
-        this.vY = this.g * t + this.v0y;
+        if (!this.landed)
+        {
+            this.vY = this.g * t + this.v0y;
+        }
+        else
+        {
+            this.vY = 0;
+        }
     }
 
     draw(surface)
