@@ -42,6 +42,7 @@ class Simulation extends Window
         let delta = deltaTime / 100;
         this.t += delta;
         this.ball.updatePos(this.t, this.surface, this.xEnd);
+        this.ball.updateVelY(this.t);
     }
 
     start()
