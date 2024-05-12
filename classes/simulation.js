@@ -16,9 +16,6 @@ class Simulation extends Window
         // Calculate max height
         this.yMax = pow((this.v0 * sin(this.a)), 2) / (2 * this.g);
 
-        // Create ball
-        this.ball = new Ball(this.v0, this.g, this.a);
-
         // Create x and y axis visualization
         this.xAxis = new Axis(
             0, this.surface.height - 20, this.surface.width, 20,
@@ -28,6 +25,9 @@ class Simulation extends Window
             0, 0, 20, this.surface.height,
             round(this.yMax, 0), 0, 1
         );
+
+        // Create ball
+        this.ball = new Ball(this.v0, this.g, this.a, this.surface.width, this.xEnd, this.surface.height, this.yMax);
 
         // Add ball to window grapics so it can be drawn by window
         this.graphics = [
