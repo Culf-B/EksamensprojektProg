@@ -1,5 +1,5 @@
 class Ball {
-    constructor(v0, g, a, surfaceWidth, endX, surfaceHeight, maxY)
+    constructor(v0, g, a, surfaceWidth, endX, surfaceHeight, maxY, horizontalScaling = true)
     {
         // Vars setup
         this.v0 = v0;
@@ -15,6 +15,11 @@ class Ball {
 
         this.horizontalPixelRatio = (surfaceWidth - this.r * 2) / endX;
         this.verticalPixelRatio = (surfaceHeight - this.r * 2) / maxY;
+
+        if (horizontalScaling)
+        {
+            this.verticalPixelRatio = this.horizontalPixelRatio;
+        }
 
         this.x = 0;
         this.y = 0;
@@ -70,6 +75,10 @@ class Ball {
         surface.line(this.x, this.y, this.x + this.vX * this.horizontalPixelRatio, this.y);
         surface.stroke(255, 100, 100);
         surface.line(this.x, this.y, this.x, this.y + this.vY * this.verticalPixelRatio);
+
+        // Draw direction vector
+        surface.stroke(255, 255, 100)
+        surface.line(this.x, this.y, this.x + this.vX * this.horizontalPixelRatio, this.y + this.vY * this.verticalPixelRatio)
 
         surface.pop()
     }

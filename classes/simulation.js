@@ -19,11 +19,11 @@ class Simulation extends Window
         // Create x and y axis visualization
         this.xAxis = new Axis(
             0, this.surface.height - 20, this.surface.width, 20,
-            0, round(this.xEnd, 0), 0, false
+            0, round(this.xEnd, 1), 0, false
         );
         this.yAxis = new Axis(
             0, 0, 20, this.surface.height,
-            round(this.yMax, 0), 0, 1
+            round(this.xEnd, 1), 0, 1
         );
 
         // Create ball
@@ -37,10 +37,17 @@ class Simulation extends Window
         ];
     }
 
-    update()
+    update(timeStep = undefined)
     {
-        let delta = deltaTime / 100;
-        this.t += delta;
+        if (timeStep != undefined)
+        {
+            this.t += timeStep;
+        }
+        else
+        {
+            let delta = deltaTime / 1000; // Get deltatime in seconds
+            this.t += delta;
+        }
         this.ball.updatePos(this.t, this.surface, this.xEnd);
         this.ball.updateVelY(this.t);
     }
@@ -51,11 +58,6 @@ class Simulation extends Window
     }
 
     pause()
-    {
-
-    }
-
-    step()
     {
 
     }
