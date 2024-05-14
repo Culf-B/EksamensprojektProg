@@ -9,10 +9,13 @@ class Settings extends Window {
         //slider setting
         this.gSlider.position(25,30);
         this.gSlider.size(150);
+        this.gSlider.input(this.setupSettings.bind(this));
         this.v0Slider.position(25,70);
         this.v0Slider.size(150);
+        this.v0Slider.input(this.setupSettings.bind(this));
         this.thetaSlider.position(25,110);
         this.thetaSlider.size(150);
+        this.thetaSlider.input(this.setupSettings.bind(this));
 
         //Create buttons
         this.startButton=createButton(`Start`);
