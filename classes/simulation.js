@@ -59,4 +59,8 @@ class Simulation extends Window
     {
 
     }
+    draw()
+    {
+        rect(5,5, width/2-5,height/2-5,2.5);
+    }
 }
