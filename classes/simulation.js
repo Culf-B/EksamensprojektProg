@@ -51,14 +51,4 @@ class Simulation extends Window
         this.ball.updatePos(this.t, this.surface, this.xEnd);
         this.ball.updateVelY(this.t);
     }
-
-    start()
-    {
-
-    }
-
-    pause()
-    {
-
-    }
 }
