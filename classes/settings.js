@@ -2,23 +2,23 @@ class Settings extends Window {
     constructor() {
         super(0,0,200,200,[],[124,160,0]);
         //create sliders
-        this.gSlider = createSlider(0,20,9.8,0.2);
-        this.v0 = createSlider(0,10,0,1);
-        this.theta = createSlider(0,90,45,1);
+        this.gSlider = createSlider(0,20,9.82,0.2);
+        this.v0Slider = createSlider(0,20,10,1);
+        this.thetaSlider = createSlider(0,90,45,1);
 
         //slider setting
         this.gSlider.position(25,30);
         this.gSlider.size(150);
-        this.v0.position(25,70);
-        this.v0.size(150);
-        this.theta.position(25,110);
-        this.theta.size(150);
+        this.v0Slider.position(25,70);
+        this.v0Slider.size(150);
+        this.thetaSlider.position(25,110);
+        this.thetaSlider.size(150);
 
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
         this.stopButton=createButton(`Stop`);
-        this.saveButton=createButton(`save`)
+        this.setupButton=createButton(`Setup`)
         //button settings
         this.startButton.position(5,160);
         this.startButton.size(45);
@@ -26,42 +26,53 @@ class Settings extends Window {
         this.pauseButton.size(50);
         this.stopButton.position(103,160);
         this.stopButton.size(45);
-        this.saveButton.position(150,160);
-        this.saveButton.size(45);
+        this.setupButton.position(150,160);
+        this.setupButton.size(45);
         //button functions
-        this.startButton.mousePressed(this.start);
-        this.pauseButton.mousePressed(this.pause);
-        this.stopButton.mousePressed(this.stop);
-        this.saveButton.mousePressed(this.saveSettings);
-        //text
-        text(`Tynde acceleration`);
+        this.startButton.mousePressed(this.start.bind(this));
+        this.pauseButton.mousePressed(this.pause.bind(this));
+        this.stopButton.mousePressed(this.stop.bind(this));
+        this.setupButton.mousePressed(this.setupSettings.bind(this));
 
+        // Simulation stuff
+        this.simulation = undefined;
+        this.running = false;
     }
-    draw()
-    {
-        
-        
 
+    update()
+    {
+        if (this.simulation != undefined)
+        {
+            if (this.running)
+            {
+                this.simulation.update();
+            }
+            this.simulation.drawWindow();
+        }
     }
-    saveSettings()
+    setupSettings()
     {
-
-        savedG = this.gSlider.value();
-        savedV0 = this.v0.value();
-        savedTheta = this.theta.value();
-
+        console.log("Log setup");
+        this.g = this.gSlider.value();
+        this.v0 = this.v0Slider.value();
+        this.a = this.thetaSlider.value();
+        
+        this.simulation = new Simulation(this.v0, this.g, this.a);
     }
     start() 
     {
-        console.log("logStart")
+        console.log("logStart");
+        this.running = true;
     }
     pause()
     {
-        console.log("logPause")
-        return false;
+        console.log("logPause");
+        this.running = false;
     }
     stop()
     {
-        console.log("logStop")
+        console.log("logStop");
+        this.running = false;
+        this.simulation = undefined;
     }    
 }

@@ -8,7 +8,7 @@ class Simulation extends Window
         this.t = 0;
         this.v0 = v0;
         this.g = g;
-        this.a = a;
+        this.a = -a;
 
         // Calculate end x position
         this.xEnd = -((pow(this.v0, 2) * sin(2 * this.a)) / this.g);
@@ -35,6 +35,7 @@ class Simulation extends Window
             {type: "classObject", object: this.xAxis},
             {type: "classObject", object: this.yAxis}
         ];
+        this.update(0);
     }
 
     update(timeStep = undefined)
