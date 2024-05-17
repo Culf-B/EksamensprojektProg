@@ -37,6 +37,8 @@ class Settings extends Window {
         // Simulation stuff
         this.simulation = undefined;
         this.running = false;
+
+        //text
     }
 
     update()
@@ -49,6 +51,11 @@ class Settings extends Window {
             }
             this.simulation.drawWindow();
         }
+        //text
+        this.surface.text(`tyngdeacceleration`,50,20);
+        this.surface.text(`Start fart`,50,60);
+        this.surface.text(`Vinkel`,50,100);
+
     }
     setupSettings()
     {
