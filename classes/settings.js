@@ -2,9 +2,10 @@ class Settings extends Window {
     constructor() {
         super(0,0,200,200,[],[124,160,0]);
         //create sliders
-        this.gSlider = createSlider(0,20,9.82,0.2);
-        this.v0Slider = createSlider(0,20,10,1);
-        this.thetaSlider = createSlider(0,90,45,1);
+        this.gSlider = createSlider(0.01,20,9.82,0.2);
+        this.v0Slider = createSlider(0.1,20,10,1);
+        this.thetaSlider = createSlider(0.1,89.9,45,1);
+        this.timeSlider = createSlider(0,1,0,1);
 
         //slider setting
         this.gSlider.position(25,30);
@@ -16,19 +17,22 @@ class Settings extends Window {
         this.thetaSlider.position(25,110);
         this.thetaSlider.size(150);
         this.thetaSlider.input(this.setupSettings.bind(this));
+        this.timeSlider.position(25,180);
+        this.timeSlider.size(150);
+        this.timeSlider.input(this.time.bind(this));
 
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
         this.restartButton=createButton(`Restart`);
         //button settings
-        this.startButton.position(47,160);
+        this.startButton.position(47,140);
         this.startButton.size(50);
-        this.pauseButton.position(47,160);
+        this.pauseButton.position(47,140);
         this.pauseButton.size(50);
         this.pauseButton.hide();
-        this.restartButton.position(103,160);
-        this.restartButton.size(45);
+        this.restartButton.position(103,140);
+        this.restartButton.size(55);
         //button functions
         this.startButton.mousePressed(this.start.bind(this));
         this.pauseButton.mousePressed(this.pause.bind(this));
@@ -50,6 +54,7 @@ class Settings extends Window {
             if (this.running)
             {
                 this.simulation.update();
+                this.timeSlider.elt.value = this.simulation.getCurrentTime();
             }
             this.simulation.drawWindow();
         }
@@ -67,7 +72,9 @@ class Settings extends Window {
         this.a = this.thetaSlider.value();
         
         this.simulation = new Simulation(this.v0, this.g, this.a);
-        
+        this.timeSlider.elt.max = this.simulation.getEndtime();
+        this.timeSlider.elt.step = this.simulation.getEndtime()/100;
+
     }
     start() 
     {
@@ -89,4 +96,10 @@ class Settings extends Window {
         this.pause()
         this.setupSettings()
     }    
+    time()
+    {
+        this.simulation.setTime(this.timeSlider.value());
+        console.log(this.timeSlider.value());
+        this.simulation.update(0);
+    }
 }
