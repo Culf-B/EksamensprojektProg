@@ -1,5 +1,5 @@
 class Graph extends Window {
-    constructor() {
-        
+    constructor(x,y) {
+
     }
 }

@@ -20,18 +20,18 @@ class Settings extends Window {
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
-        this.stopButton=createButton(`Stop`);
+        this.restartButton=createButton(`Stop`);
         //button settings
         this.startButton.position(5,160);
         this.startButton.size(45);
         this.pauseButton.position(52,160);
         this.pauseButton.size(50);
-        this.stopButton.position(103,160);
-        this.stopButton.size(45);
+        this.restartButton.position(103,160);
+        this.restartButton.size(45);
         //button functions
         this.startButton.mousePressed(this.start.bind(this));
         this.pauseButton.mousePressed(this.pause.bind(this));
-        this.stopButton.mousePressed(this.stop.bind(this));
+        this.restartButton.mousePressed(this.restart.bind(this));
 
         // Simulation stuff
         this.simulation = undefined;
@@ -71,16 +71,22 @@ class Settings extends Window {
     {
         console.log("logStart");
         this.running = true;
+        this.startButton.hide();
+        this.pauseButton.show();
     }
     pause()
     {
         console.log("logPause");
         this.running = false;
+        this.startButton.show();
+        this.pauseButton.hide();
     }
-    stop()
+    restart()
     {
-        console.log("logStop");
+        console.log("logRestart");
         this.running = false;
         this.simulation = undefined;
+        this.startButton.show();
+        this.pauseButton.hide();
     }    
 }
