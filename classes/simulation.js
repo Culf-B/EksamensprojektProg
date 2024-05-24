@@ -26,6 +26,8 @@ class Simulation extends Window
             round(this.xEnd, 1), 0, 1
         );
 
+        this.endTime = (2 * this.v0 * sin(-this.a)) / this.g;
+
         // Create ball
         this.ball = new Ball(this.v0, this.g, this.a, this.surface.width, this.xEnd, this.surface.height, this.yMax);
 
@@ -49,7 +51,17 @@ class Simulation extends Window
             let delta = deltaTime / 1000; // Get deltatime in seconds
             this.t += delta;
         }
+
+        if (this.t > this.endTime) {
+            this.t = this.endTime;
+        }
+
         this.ball.updatePos(this.t, this.surface, this.xEnd);
         this.ball.updateVelY(this.t);
+    }
+
+    getEndtime()
+    {
+        return this.endTime;
     }
 }
