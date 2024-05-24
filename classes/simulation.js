@@ -65,6 +65,11 @@ class Simulation extends Window
         this.t = newTime;
     }
 
+    getCurrentTime()
+    {
+        return this.t;
+    }
+
     getEndtime()
     {
         return this.endTime;
