@@ -101,5 +101,6 @@ class Settings extends Window {
         this.simulation.setTime(this.timeSlider.value());
         console.log(this.timeSlider.value());
         this.simulation.update(0);
+        this.pause();
     }
 }
