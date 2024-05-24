@@ -60,6 +60,11 @@ class Simulation extends Window
         this.ball.updateVelY(this.t);
     }
 
+    setTime(newTime)
+    {
+        this.t = newTime;
+    }
+
     getEndtime()
     {
         return this.endTime;
