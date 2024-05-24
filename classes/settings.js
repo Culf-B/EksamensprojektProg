@@ -20,12 +20,13 @@ class Settings extends Window {
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
-        this.restartButton=createButton(`Stop`);
+        this.restartButton=createButton(`Restart`);
         //button settings
-        this.startButton.position(5,160);
-        this.startButton.size(45);
-        this.pauseButton.position(52,160);
+        this.startButton.position(47,160);
+        this.startButton.size(50);
+        this.pauseButton.position(47,160);
         this.pauseButton.size(50);
+        this.pauseButton.hide();
         this.restartButton.position(103,160);
         this.restartButton.size(45);
         //button functions
@@ -66,6 +67,7 @@ class Settings extends Window {
         this.a = this.thetaSlider.value();
         
         this.simulation = new Simulation(this.v0, this.g, this.a);
+        
     }
     start() 
     {
@@ -84,9 +86,7 @@ class Settings extends Window {
     restart()
     {
         console.log("logRestart");
-        this.running = false;
-        this.simulation = undefined;
-        this.startButton.show();
-        this.pauseButton.hide();
+        this.pause()
+        this.setupSettings()
     }    
 }
