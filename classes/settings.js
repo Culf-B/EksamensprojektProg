@@ -21,7 +21,6 @@ class Settings extends Window {
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
         this.stopButton=createButton(`Stop`);
-        this.setupButton=createButton(`Setup`)
         //button settings
         this.startButton.position(5,160);
         this.startButton.size(45);
@@ -29,17 +28,16 @@ class Settings extends Window {
         this.pauseButton.size(50);
         this.stopButton.position(103,160);
         this.stopButton.size(45);
-        this.setupButton.position(150,160);
-        this.setupButton.size(45);
         //button functions
         this.startButton.mousePressed(this.start.bind(this));
         this.pauseButton.mousePressed(this.pause.bind(this));
         this.stopButton.mousePressed(this.stop.bind(this));
-        this.setupButton.mousePressed(this.setupSettings.bind(this));
 
         // Simulation stuff
         this.simulation = undefined;
         this.running = false;
+        this.setupSettings();
+
 
         //text
     }
