@@ -1,6 +1,6 @@
 class Simulation extends Window
 {
-    constructor(v0, g, a)
+    constructor(v0, g, a, windSpeed)
     {
         super(width / 2, 0, width / 2, height / 2, [], [150, 170, 255]);
 
@@ -9,6 +9,8 @@ class Simulation extends Window
         this.v0 = v0;
         this.g = g;
         this.a = -a;
+        this.windSpeed = windSpeed;
+        console.log("Windspeed: " + windSpeed + "m/s");
 
         // Calculate end x position
         this.xEnd = -((pow(this.v0, 2) * sin(2 * this.a)) / this.g);

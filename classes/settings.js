@@ -3,6 +3,10 @@ class Settings extends Window
     constructor() 
     {
         super(0,0,200,200,[],[124,160,0]);
+
+        // Weather
+        this.weather = new Weather();
+
         //create sliders
         this.gSlider = createSlider(0.01,20,9.82,0.2);
         this.v0Slider = createSlider(0.1,20,10,1);
@@ -44,7 +48,6 @@ class Settings extends Window
         this.simulation = undefined;
         this.running = false;
         this.setupSettings();
-
     }
 
     update()
@@ -64,14 +67,16 @@ class Settings extends Window
         this.surface.text(`Vinkel`,50,100);
 
     }
-    setupSettings()
+    async setupSettings()
     {
         console.log("Log setup");
         this.g = this.gSlider.value();
         this.v0 = this.v0Slider.value();
         this.a = this.thetaSlider.value();
         
-        this.simulation = new Simulation(this.v0, this.g, this.a);
+        this.currentWindSpeed = await this.weather.getWindData();
+
+        this.simulation = new Simulation(this.v0, this.g, this.a, this.currentWindSpeed);
         this.timeSlider.elt.max = this.simulation.getEndtime();
         this.timeSlider.elt.step = this.simulation.getEndtime()/100;
 

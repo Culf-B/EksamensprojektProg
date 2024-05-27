@@ -18,16 +18,25 @@ class Weather
         this.stationFound = true;
     }
 
+    sleep(sleepTimeMs)
+    {
+        return new Promise(resolve => setTimeout(resolve, sleepTimeMs));
+    }
+
     async getWindData()
     {
-        if (this.stationFound)
+        if (this.windDataUpdateTime + 10000 < Date.now())
         {
-            if (this.windDataUpdateTime + 10000 < Date.now())
+            while (!this.stationFound)
             {
-                this.windDataUpdateTime = Date.now();
-                this.windSpeed = await this.getWindSpeedFromStation(this.station.id)
+                console.log("Waiting for station...");
+                await this.sleep(1000);
             }
+
+            this.windDataUpdateTime = Date.now();
+            this.windSpeed = await this.getWindSpeedFromStation(this.station.id)
         }
+        
         return this.windSpeed;
     }
 
