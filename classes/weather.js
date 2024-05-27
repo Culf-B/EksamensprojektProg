@@ -99,6 +99,7 @@ class Weather
         if (this.position == undefined) {
             this.position = [56.1558484, 10.187535];
         }
+        return this.position;
     }
 
     async getAllStations()
