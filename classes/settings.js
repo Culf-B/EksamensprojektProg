@@ -83,28 +83,24 @@ class Settings extends Window
     }
     start() 
     {
-        console.log("logStart");
         this.running = true;
         this.startButton.hide();
         this.pauseButton.show();
     }
     pause()
     {
-        console.log("logPause");
         this.running = false;
         this.startButton.show();
         this.pauseButton.hide();
     }
     restart()
     {
-        console.log("logRestart");
         this.pause()
         this.setupSettings()
     }    
     time()
     {
         this.simulation.setTime(this.timeSlider.value());
-        console.log(this.timeSlider.value());
         this.simulation.update(0);
         this.pause();
     }
