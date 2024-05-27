@@ -1,11 +1,11 @@
 class Weather
 {
-
     constructor() 
     {
         this.stationFound = false;
         this.windDataUpdateTime = 0;
         this.windSpeed = 0;
+        this.apiKey = "6769b06c-16f3-4672-a562-0c4332701c80"
 
         this.setup();
     }
@@ -44,7 +44,7 @@ class Weather
     {
         console.log("Retrieving wind speed from station " + stationId + "...");
         this.windSpeedResponse = await fetch(
-            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=6769b06c-16f3-4672-a562-0c4332701c80&stationId=" + stationId
+            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=" + this.apiKey + "&stationId=" + stationId
         );
         this.windSpeedResponseJson = await this.windSpeedResponse.json();
         this.processedWindSpeedResponse = this.windSpeedResponseJson.features[0].properties.value;
@@ -105,7 +105,7 @@ class Weather
     {
         console.log("Requesting stations...");
         this.stationResponse = await fetch(
-            "https://dmigw.govcloud.dk/v2/metObs/collections/station/items?status=Active&api-key=6769b06c-16f3-4672-a562-0c4332701c80&type=Synop"
+            "https://dmigw.govcloud.dk/v2/metObs/collections/station/items?status=Active&api-key=" + this.apiKey + "&type=Synop"
         )
         this.stationResponseJson = await this.stationResponse.json();
 
