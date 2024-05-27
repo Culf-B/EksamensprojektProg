@@ -1,5 +1,7 @@
-class Settings extends Window {
-    constructor() {
+class Settings extends Window 
+{
+    constructor() 
+    {
         super(0,0,200,200,[],[124,160,0]);
         //create sliders
         this.gSlider = createSlider(0.01,20,9.82,0.2);
@@ -43,8 +45,6 @@ class Settings extends Window {
         this.running = false;
         this.setupSettings();
 
-
-        //text
     }
 
     update()
