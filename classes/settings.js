@@ -2,8 +2,40 @@ class Settings extends Window
 {
     constructor() 
     {
-        super(0,0,200,200,[],[124,160,0]);
-
+        super(
+            0,0,200,400, // Position and size
+            [ // Graphics elements
+                {
+                    "type": "text",
+                    "color": [0, 0, 0],
+                    "text": "Tyngdeacceleration",
+                    "x": 20,
+                    "y": 30
+                },
+                {
+                    "type": "text",
+                    "color": [0, 0, 0],
+                    "text": "Start hastighed",
+                    "x": 20,
+                    "y": 70
+                },
+                {
+                    "type": "text",
+                    "color": [0, 0, 0],
+                    "text": "Vinkel",
+                    "x": 20,
+                    "y": 110
+                },
+                {
+                    "type": "text",
+                    "color": [0, 0, 0],
+                    "text": "Tid",
+                    "x": 20,
+                    "y": 180
+                }
+            ],
+            [124,160,0] // Background color
+        );
         // Weather
         this.weather = new Weather();
 
