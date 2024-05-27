@@ -3,6 +3,10 @@ class Weather
 
     constructor() 
     {
+        this.stationFound = false;
+        this.windDataUpdateTime = 0;
+        this.windSpeed = 0;
+
         this.setup();
     }
 
@@ -11,19 +15,31 @@ class Weather
         this.position = await this.getPosition();
         this.stations = await this.getAllStations();
         this.station = await this.findClosestStation(this.position, this.stations);
-        console.log(this.station);
-        await this.getDataFromStation();
+        this.stationFound = true;
     }
 
-    async getDataFromStation()
+    async getWindData()
     {
-        this.windSpeedResponse = await fetch(
-            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=6769b06c-16f3-4672-a562-0c4332701c80&stationId=" + this.station.id,
+        if (this.stationFound)
+        {
+            if (this.windDataUpdateTime + 10000 < Date.now())
             {
-                method: "GET"
+                this.windDataUpdateTime = Date.now();
+                this.windSpeed = await this.getWindSpeedFromStation(this.station.id)
             }
+        }
+        return this.windSpeed;
+    }
+
+    async getWindSpeedFromStation(stationId)
+    {
+        console.log("Retrieving wind speed from station " + stationId + "...");
+        this.windSpeedResponse = await fetch(
+            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=6769b06c-16f3-4672-a562-0c4332701c80&stationId=" + stationId
         );
-        console.log(this.windSpeedResponse);
+        this.windSpeedResponseJson = await this.windSpeedResponse.json();
+        this.processedWindSpeedResponse = this.windSpeedResponseJson.features[0].properties.value;
+        return this.processedWindSpeedResponse;
     }
 
     async findClosestStation(position, stations)
