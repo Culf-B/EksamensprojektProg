@@ -70,6 +70,10 @@ class Weather
                 "maximumAge": Infinity
             }
         );
+        // Set to default position of getCurrentPosition returns undefined
+        if (this.position == undefined) {
+            this.position = [56.1558484, 10.187535];
+        }
     }
 
     async getAllStations()
