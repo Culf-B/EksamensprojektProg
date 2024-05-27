@@ -127,8 +127,8 @@ class Settings extends Window
     }
     restart()
     {
-        this.pause()
-        this.setupSettings()
+        this.simulation.setTime(0);
+        this.simulation.update(0);
     }    
     time()
     {
