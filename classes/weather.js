@@ -18,7 +18,7 @@ class Weather
     async getDataFromStation()
     {
         this.windSpeedResponse = await fetch(
-            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=api-key=6769b06c-16f3-4672-a562-0c4332701c80&stationId=" + this.station.id,
+            "https://dmigw.govcloud.dk/v2/metObs/collections/observation/items?period=latest-10-minutes&parameterId=wind_speed&limit=1&api-key=6769b06c-16f3-4672-a562-0c4332701c80&stationId=" + this.station.id,
             {
                 method: "GET"
             }
