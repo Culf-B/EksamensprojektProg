@@ -27,7 +27,8 @@ class updateableTxt
     draw(surface)
     {
         surface.push();
-        surface.noFill()
+        surface.fill(this.color[0], this.color[1], this.color[2]);
+        surface.strokeWeight(0.5);
         surface.stroke(this.color[0], this.color[1], this.color[2]);
         surface.text(this.text, this.x, this.y);
         surface.pop();
