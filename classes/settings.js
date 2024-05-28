@@ -4,36 +4,7 @@ class Settings extends Window
     {
         super(
             0,0,200,400, // Position and size
-            [ // Graphics elements
-                {
-                    "type": "text",
-                    "color": [0, 0, 0],
-                    "text": "Tyngdeacceleration",
-                    "x": 20,
-                    "y": 30
-                },
-                {
-                    "type": "text",
-                    "color": [0, 0, 0],
-                    "text": "Start hastighed",
-                    "x": 20,
-                    "y": 70
-                },
-                {
-                    "type": "text",
-                    "color": [0, 0, 0],
-                    "text": "Vinkel",
-                    "x": 20,
-                    "y": 110
-                },
-                {
-                    "type": "text",
-                    "color": [0, 0, 0],
-                    "text": "Tid",
-                    "x": 20,
-                    "y": 180
-                }
-            ],
+            [],
             [124,160,0] // Background color
         );
         // Weather
@@ -58,6 +29,16 @@ class Settings extends Window
         this.timeSlider.position(25,180);
         this.timeSlider.size(150);
         this.timeSlider.input(this.time.bind(this));
+
+        // Slider describtions
+        this.gSliderText = new updateableTxt("Tyngdeacceleration: " + this.gSlider.value() + "m/s^2", 20, 30);
+        this.addGraphicsObject(this.gSliderText);
+        this.v0SliderText = new updateableTxt("Start fart: " + this.v0Slider.value() + "m/s", 20, 70);
+        this.addGraphicsObject(this.v0SliderText);
+        this.thetaSliderText = new updateableTxt("Vinkel: " + this.thetaSlider.value() + "m/s^2", 20, 110);
+        this.addGraphicsObject(this.thetaSliderText);
+        this.timeSliderText = new updateableTxt("Tid: " + this.timeSlider.value() + "s", 20, 180);
+        this.addGraphicsObject(this.timeSliderText);
 
         //Create buttons
         this.startButton=createButton(`Start`);
@@ -84,21 +65,26 @@ class Settings extends Window
 
     update()
     {
+        this.updateTextSliders();
         if (this.simulation != undefined)
         {
             if (this.running)
             {
                 this.simulation.update();
-                this.timeSlider.elt.value = this.simulation.getCurrentTime();
             }
             this.simulation.drawWindow();
+            this.timeSlider.elt.value = this.simulation.getCurrentTime();
         }
-        //text
-        this.surface.text(`tyngdeacceleration`,50,20);
-        this.surface.text(`Start fart`,50,60);
-        this.surface.text(`Vinkel`,50,100);
 
     }
+    updateTextSliders()
+    {
+        this.gSliderText.updateText("Tyngdeacceleration: " + this.gSlider.value() + "m/s^2");
+        this.v0SliderText.updateText("Start fart: " + this.v0Slider.value() + "m/s");
+        this.thetaSliderText.updateText("Vinkel: " + this.thetaSlider.value() + "m/s^2");
+        this.timeSliderText.updateText("Tid: " + round(this.timeSlider.value(), 3) + "s");
+    }
+
     async setupSettings()
     {
         console.log("Log setup");
@@ -111,7 +97,6 @@ class Settings extends Window
         this.simulation = new Simulation(this.v0, this.g, this.a, this.currentWindSpeed);
         this.timeSlider.elt.max = this.simulation.getEndtime();
         this.timeSlider.elt.step = this.simulation.getEndtime()/100;
-
     }
     start() 
     {

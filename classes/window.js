@@ -34,6 +34,11 @@ class Window
         });
     }
 
+    addGraphicsObject(obj)
+    {
+        this.graphics.push({"type": "classObject", "object":obj});
+    }
+
     drawWindow()
     {
         this.surface.background(this.bgColor);
