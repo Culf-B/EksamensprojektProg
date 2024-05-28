@@ -2,7 +2,7 @@ class Simulation extends Window
 {
     constructor(v0, g, a, windSpeed)
     {
-        super(width / 2, 0, width / 2, height / 2, [], [150, 170, 255]);
+        super(width / 3, 0, (width / 3) * 2, height, [], [150, 170, 255]);
 
         // Var setup
         this.t = 0;
