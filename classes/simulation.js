@@ -62,6 +62,11 @@ class Simulation extends Window
         this.ball.updateVelY(this.t);
     }
 
+    getWindSpeed()
+    {
+        return this.windSpeed;
+    }
+
     setTime(newTime)
     {
         this.t = newTime;

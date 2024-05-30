@@ -9,6 +9,9 @@ class Settings extends Window
         );
         // Weather
         this.weather = new Weather();
+        this.windText = new updateableTxt("", 20, 220);
+        this.addGraphicsObject(this.windText);
+        
 
         //create sliders
         this.gSlider = createSlider(0.01,20,9.82,0.2);
@@ -68,12 +71,17 @@ class Settings extends Window
         this.updateTextSliders();
         if (this.simulation != undefined)
         {
+            this.windText.updateText("Wind speed: " + this.simulation.getWindSpeed() + "m/s");
             if (this.running)
             {
                 this.simulation.update();
             }
             this.simulation.drawWindow();
             this.timeSlider.elt.value = this.simulation.getCurrentTime();
+        }
+        else
+        {
+            this.windText.updateText("");
         }
 
     }
