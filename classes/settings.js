@@ -129,6 +129,7 @@ class Settings extends Window
         this.arealSliderText.updateText("Overflade Areal: " + this.arealSlider.value() + "m^2");
         this.airDensityText.updateText("Luft Densitet: " + this.airDensitySlider.value() + "Kg/m^3");
         this.massText.updateText("Masse: " + this.massSlider.value() + "Kg" );
+        this.windDirText.updateText("vind retning: " + this.windDirValue);
     }
 
     async setupSettings()
