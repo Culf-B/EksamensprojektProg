@@ -18,6 +18,8 @@ class Settings extends Window
         this.v0Slider = createSlider(0.1,20,10,1);
         this.thetaSlider = createSlider(0.1,89.9,45,1);
         this.timeSlider = createSlider(0,1,0,1);
+        this.arealSlider = createSlider(1,25,0,1);
+        this.airDensity = createSlider (1,10,0,0,25);
 
         //slider setting
         this.gSlider.position(25,30);
@@ -32,6 +34,12 @@ class Settings extends Window
         this.timeSlider.position(25,180);
         this.timeSlider.size(150);
         this.timeSlider.input(this.time.bind(this));
+        this.arealSlider.position(25,270);
+        this.arealSlider.size(150);
+        this.arealSlider.input(this.setupSettings.bind(this));
+        this.airDensity.position(25,230);
+        this.airDensity.size(150);
+        this.airDensity.input(this.setupSettings.bind(this));
 
         // Slider describtions
         this.gSliderText = new updateableTxt("Tyngdeacceleration: " + this.gSlider.value() + "m/s^2", 20, 30);
@@ -42,7 +50,10 @@ class Settings extends Window
         this.addGraphicsObject(this.thetaSliderText);
         this.timeSliderText = new updateableTxt("Tid: " + this.timeSlider.value() + "s", 20, 180);
         this.addGraphicsObject(this.timeSliderText);
-
+        this.arealSliderText = new updateableTxt("Overflade Areal" + this.arealSlider.value() + "m^2", 20, 270);
+        this.addGraphicsObject(this.arealSliderText);
+        this.airDensityText = new updateableTxt("Luft Densitet " + this.airDensity.value() + "kg/m^3", 20,230);
+        this.addGraphicsObject(this.airDensityText);
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
@@ -91,6 +102,8 @@ class Settings extends Window
         this.v0SliderText.updateText("Start fart: " + this.v0Slider.value() + "m/s");
         this.thetaSliderText.updateText("Vinkel: " + this.thetaSlider.value() + "m/s^2");
         this.timeSliderText.updateText("Tid: " + round(this.timeSlider.value(), 3) + "s");
+        this.arealSliderText.updateText("Overflade Areal" + this.arealSlider.value() + "m^2");
+
     }
 
     async setupSettings()
