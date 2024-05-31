@@ -19,7 +19,9 @@ class Settings extends Window
         this.thetaSlider = createSlider(0.1,89.9,45,1);
         this.timeSlider = createSlider(0,1,0,1);
         this.arealSlider = createSlider(1,25,0,1);
-        this.airDensity = createSlider (1,10,0,0,25);
+        this.airDensitySlider = createSlider (1,10,0,0.25);
+        this.windDirSlider = createSlider (-1,1,0,1);
+        this.massSlider = createSlider (0.1,100,0.1,1);
 
         //slider setting
         this.gSlider.position(25,30);
@@ -37,9 +39,15 @@ class Settings extends Window
         this.arealSlider.position(25,270);
         this.arealSlider.size(150);
         this.arealSlider.input(this.setupSettings.bind(this));
-        this.airDensity.position(25,230);
-        this.airDensity.size(150);
-        this.airDensity.input(this.setupSettings.bind(this));
+        this.airDensitySlider.position(25,230);
+        this.airDensitySlider.size(150);
+        this.airDensitySlider.input(this.setupSettings.bind(this));
+        this.windDirSlider.position(25,380);
+        this.windDirSlider.size(150);
+        this.windDirSlider.input(this.setupSettings.bind(this));
+        this.massSlider.position(25,310);
+        this.massSlider.size(150);
+        this.massSlider.input(this.setupSettings.bind(this));
 
         // Slider describtions
         this.gSliderText = new updateableTxt("Tyngdeacceleration: " + this.gSlider.value() + "m/s^2", 20, 30);
@@ -50,10 +58,14 @@ class Settings extends Window
         this.addGraphicsObject(this.thetaSliderText);
         this.timeSliderText = new updateableTxt("Tid: " + this.timeSlider.value() + "s", 20, 180);
         this.addGraphicsObject(this.timeSliderText);
-        this.arealSliderText = new updateableTxt("Overflade Areal" + this.arealSlider.value() + "m^2", 20, 270);
+        this.arealSliderText = new updateableTxt("Overflade Areal: " + this.arealSlider.value() + "m^2", 20, 270);
         this.addGraphicsObject(this.arealSliderText);
-        this.airDensityText = new updateableTxt("Luft Densitet " + this.airDensity.value() + "kg/m^3", 20,230);
+        this.airDensityText = new updateableTxt("Luft Densitet: " + this.airDensitySlider.value() + "kg/m^3", 20,230);
         this.addGraphicsObject(this.airDensityText);
+        this.windDirText = new updateableTxt("vind retning: " + "insert if statemnet",20,380);
+        this.addGraphicsObject(this.windDirText);
+        this.massText = new updateableTxt("Masse: " + this.massSlider.value() + "kg" ,20 , 310);
+        this.addGraphicsObject(this.massText);
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
@@ -102,8 +114,9 @@ class Settings extends Window
         this.v0SliderText.updateText("Start fart: " + this.v0Slider.value() + "m/s");
         this.thetaSliderText.updateText("Vinkel: " + this.thetaSlider.value() + "m/s^2");
         this.timeSliderText.updateText("Tid: " + round(this.timeSlider.value(), 3) + "s");
-        this.arealSliderText.updateText("Overflade Areal" + this.arealSlider.value() + "m^2");
-
+        this.arealSliderText.updateText("Overflade Areal: " + this.arealSlider.value() + "m^2");
+        this.airDensityText.updateText("Luft Densitet: " + this.airDensitySlider.value() + "Kg/m^3");
+        this.massText.updateText("Masse: " + this.massSlider.value() + "Kg" );
     }
 
     async setupSettings()
