@@ -39,11 +39,14 @@ class Simulation extends Window
             {type: "classObject", object: this.xAxis},
             {type: "classObject", object: this.yAxis}
         ];
+        this.windSpeedText = new updateableTxt("Vind Hastighed: " + this.windSpeed,290,10);
+        this.addGraphicsObject(this.windSpeedText);
         this.update(0);
     }
 
     update(timeStep = undefined)
     {
+        this.windSpeedText.updateText("Vind Hastighed: " + this.windSpeed);  
         if (timeStep != undefined)
         {
             this.t += timeStep;

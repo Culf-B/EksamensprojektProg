@@ -9,7 +9,7 @@ class Settings extends Window
         );
         // Weather
         this.weather = new Weather();
-        this.windText = new updateableTxt("", 20, 220);
+        this.windText = new updateableTxt("", 550, 0);
         this.addGraphicsObject(this.windText);
         
 
@@ -33,19 +33,19 @@ class Settings extends Window
         this.thetaSlider.position(25,110);
         this.thetaSlider.size(150);
         this.thetaSlider.input(this.setupSettings.bind(this));
-        this.timeSlider.position(25,180);
+        this.timeSlider.position(25,375);
         this.timeSlider.size(150);
         this.timeSlider.input(this.time.bind(this));
         this.arealSlider.position(25,270);
         this.arealSlider.size(150);
         this.arealSlider.input(this.setupSettings.bind(this));
-        this.airDensitySlider.position(25,230);
+        this.airDensitySlider.position(25,180);
         this.airDensitySlider.size(150);
         this.airDensitySlider.input(this.setupSettings.bind(this));
-        this.windDirSlider.position(25,380);
+        this.windDirSlider.position(25,320);
         this.windDirSlider.size(150);
-        this.windDirSlider.input(this.setupSettings.bind(this));
-        this.massSlider.position(25,310);
+        this.windDirSlider.input(this.setupSettings.bind(this),this.update.bind(this));
+        this.massSlider.position(25,220);
         this.massSlider.size(150);
         this.massSlider.input(this.setupSettings.bind(this));
 
@@ -56,27 +56,27 @@ class Settings extends Window
         this.addGraphicsObject(this.v0SliderText);
         this.thetaSliderText = new updateableTxt("Vinkel: " + this.thetaSlider.value() + "m/s^2", 20, 110);
         this.addGraphicsObject(this.thetaSliderText);
-        this.timeSliderText = new updateableTxt("Tid: " + this.timeSlider.value() + "s", 20, 180);
+        this.timeSliderText = new updateableTxt("Tid: " + this.timeSlider.value() + "s", 20, 375);
         this.addGraphicsObject(this.timeSliderText);
-        this.arealSliderText = new updateableTxt("Overflade Areal: " + this.arealSlider.value() + "m^2", 20, 270);
+        this.arealSliderText = new updateableTxt("Overflade Areal: " + this.arealSlider.value() + "m^2" , 20, 270);
         this.addGraphicsObject(this.arealSliderText);
-        this.airDensityText = new updateableTxt("Luft Densitet: " + this.airDensitySlider.value() + "kg/m^3", 20,230);
+        this.airDensityText = new updateableTxt("Luft Densitet: " + this.airDensitySlider.value() + "kg/m^3" , 20, 180);
         this.addGraphicsObject(this.airDensityText);
-        this.windDirText = new updateableTxt("vind retning: " + "insert if statemnet",20,380);
+        this.windDirText = new updateableTxt("vind retning: " + this.windDirValue , 20, 320);
         this.addGraphicsObject(this.windDirText);
-        this.massText = new updateableTxt("Masse: " + this.massSlider.value() + "kg" ,20 , 310);
+        this.massText = new updateableTxt("Masse: " + this.massSlider.value() + "kg" , 20, 220);
         this.addGraphicsObject(this.massText);
         //Create buttons
         this.startButton=createButton(`Start`);
         this.pauseButton=createButton(`Pause`);
         this.restartButton=createButton(`Restart`);
         //button settings
-        this.startButton.position(47,140);
+        this.startButton.position(47,340);
         this.startButton.size(50);
-        this.pauseButton.position(47,140);
+        this.pauseButton.position(47,340);
         this.pauseButton.size(50);
         this.pauseButton.hide();
-        this.restartButton.position(103,140);
+        this.restartButton.position(103,340);
         this.restartButton.size(55);
         //button functions
         this.startButton.mousePressed(this.start.bind(this));
@@ -106,6 +106,18 @@ class Settings extends Window
         {
             this.windText.updateText("");
         }
+        if (this.windDirSlider.value() == 1)
+            {
+                this.windDirValue = "Medvind"
+            }
+        else if (this.windDirSlider.value() == -1)
+            {
+                this.windDirValue = "Modvind"
+            }
+        else
+            {
+                this.windDirValue = "Vindstille"
+            }
 
     }
     updateTextSliders()
