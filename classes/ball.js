@@ -1,11 +1,12 @@
 class Ball {
-    constructor(v0, g, a, surfaceWidth, endX, surfaceHeight, maxY, horizontalScaling = true)
+    constructor(v0, g, a, windVelocity, surfaceWidth, endX, surfaceHeight, maxY, horizontalScaling = true)
     {
         // Vars setup
         this.v0 = v0;
         this.g = g;
         this.a = a;
-        this.v0x = this.v0 * cos(this.a);
+        this.windVelocity = windVelocity;
+        this.v0x = this.v0 * cos(this.a) + this.windVelocity;
         this.v0y = this.v0 * sin(this.a);
 
         this.vX = this.v0x; // Constant velocity on x-axis until landing

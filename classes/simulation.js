@@ -1,6 +1,6 @@
 class Simulation extends Window
 {
-    constructor(v0, g, a, windSpeed)
+    constructor(v0, g, a, windSpeed, windDir)
     {
         super(width / 3, 0, (width / 3) * 2, height, [], [150, 170, 255]);
 
@@ -9,11 +9,12 @@ class Simulation extends Window
         this.v0 = v0;
         this.g = g;
         this.a = -a;
-        this.windSpeed = windSpeed;
-        console.log("Windspeed: " + windSpeed + "m/s");
+        this.windVelocity = windSpeed * windDir;
+        console.log("Windspeed: " + this.windVelocity + "m/s");
 
         // Calculate end x position
-        this.xEnd = -((pow(this.v0, 2) * sin(2 * this.a)) / this.g);
+        this.endTime = (2 * this.v0 * sin(-this.a)) / this.g;
+        this.xEnd = (this.v0 * cos(this.a) + this.windVelocity) * this.endTime;
 
         // Calculate max height
         this.yMax = pow((this.v0 * sin(this.a)), 2) / (2 * this.g);
@@ -31,7 +32,7 @@ class Simulation extends Window
         this.endTime = (2 * this.v0 * sin(-this.a)) / this.g;
 
         // Create ball
-        this.ball = new Ball(this.v0, this.g, this.a, this.surface.width, this.xEnd, this.surface.height, this.yMax);
+        this.ball = new Ball(this.v0, this.g, this.a, this.windVelocity, this.surface.width, this.xEnd, this.surface.height, this.yMax);
 
         // Add ball to window grapics so it can be drawn by window
         this.graphics = [
@@ -39,14 +40,15 @@ class Simulation extends Window
             {type: "classObject", object: this.xAxis},
             {type: "classObject", object: this.yAxis}
         ];
-        this.windSpeedText = new updateableTxt("Vind Hastighed: " + this.windSpeed,290,10);
+
+        this.windSpeedText = new updateableTxt("Vind Hastighed: " + this.windVelocity, 290, 10);
         this.addGraphicsObject(this.windSpeedText);
         this.update(0);
     }
 
     update(timeStep = undefined)
     {
-        this.windSpeedText.updateText("Vind Hastighed: " + this.windSpeed);  
+        this.windSpeedText.updateText("Vind Hastighed: " + this.windVelocity);  
         if (timeStep != undefined)
         {
             this.t += timeStep;
