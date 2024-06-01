@@ -32,7 +32,7 @@ class Simulation extends Window
         this.endTime = (2 * this.v0 * sin(-this.a)) / this.g;
 
         // Create ball
-        this.ball = new Ball(this.v0, this.g, this.a, this.windVelocity, this.surface.width, this.xEnd, this.surface.height, this.yMax);
+        this.ball = new Ball(this.v0, this.g, this.a, this.windVelocity, this.surface.width, this.xEnd, this.surface.height, this.yMax, this.endTime);
 
         // Add ball to window grapics so it can be drawn by window
         this.graphics = [
@@ -41,14 +41,14 @@ class Simulation extends Window
             {type: "classObject", object: this.yAxis}
         ];
 
-        this.windSpeedText = new updateableTxt("Vind Hastighed: " + this.windVelocity, 290, 10);
+        this.windSpeedText = new updateableTxt("Vind Hastighed: " + this.windVelocity + "m/s", 270, 10);
         this.addGraphicsObject(this.windSpeedText);
         this.update(0);
     }
 
     update(timeStep = undefined)
     {
-        this.windSpeedText.updateText("Vind Hastighed: " + this.windVelocity);  
+        this.windSpeedText.updateText("Vind Hastighed: " + this.windVelocity + "m/s");  
         if (timeStep != undefined)
         {
             this.t += timeStep;
